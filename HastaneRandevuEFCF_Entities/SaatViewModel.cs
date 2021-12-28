@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HasteneRandevuEFCF_Entities
+namespace HastaneRandevuEFCF_Entities
 {
     public class SaatViewModel
     {
@@ -27,7 +27,7 @@ namespace HasteneRandevuEFCF_Entities
             }),
             (new SaatViewModel
             {
-                ID = 10,
+                ID = 11,
                 SaatDilimi = "11:00"
             }),
             (new SaatViewModel

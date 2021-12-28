@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using HastaneRandevuEFCF_BLL;
+﻿using HastaneRandevuEFCF_BLL;
 using HastaneRandevuEFCF_Entities;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace HastaneRandevuEFCF_WinFormUI
 {
@@ -38,16 +32,37 @@ namespace HastaneRandevuEFCF_WinFormUI
             dateTimePickerRandevuTarihi.Format = DateTimePickerFormat.Custom;
             dateTimePickerRandevuTarihi.CustomFormat = "dd.MM.yyyy";
             dateTimePickerRandevuTarihi.MinDate = trh;
-            dateTimePickerRandevuTarihi.MaxDate = dateTimePickerRandevuTarihi.Value.AddDays(15);
-            dateTimePickerRandevuTarihi.Value = trh;
-            if (dateTimePickerRandevuTarihi.Text.Contains("Saturday"))
+            //dateTimePickerRandevuTarihi.MaxDate = dateTimePickerRandevuTarihi.Value.AddDays(15);
+            //dateTimePickerRandevuTarihi.Value = trh;
+
+            //if (dateTimePickerRandevuTarihi.Text.Contains("Saturday"))
+            //{
+            //    MessageBox.Show("Cumartesi günü randevu alamazsınız!");
+            //}
+            //else if (dateTimePickerRandevuTarihi.Text.Contains("Sunday"))
+            //{
+            //    MessageBox.Show("Pazar günü randevu alamazsınız!");
+            //}
+            
+            DateTime dt = DateTime.Now.AddDays(1);
+            int nDays=0;
+            int weeks = nDays / 5;
+            nDays %= 5;
+            while (dt.DayOfWeek == DayOfWeek.Saturday || dt.DayOfWeek == DayOfWeek.Sunday)
+                dt = dt.AddDays(1);
+
+            while (nDays-- > 0)
             {
-                MessageBox.Show("Cumartesi günü randevu alamazsınız!");
+                dt = dt.AddDays(1);
+                if (dt.DayOfWeek == DayOfWeek.Saturday)
+                    dt = dt.AddDays(2);
             }
-            else if (dateTimePickerRandevuTarihi.Text.Contains("Sunday"))
-            {
-                MessageBox.Show("Pazar günü randevu alamazsınız!");
-            }
+            dateTimePickerRandevuTarihi.MaxDate=dt.AddDays(weeks * 7);
+
+            
+
+
+
         }
 
         private void HastaListBoxiniDoldur()
@@ -142,6 +157,11 @@ namespace HastaneRandevuEFCF_WinFormUI
         private void dateTimePickerRandevuTarihi_ValueChanged(object sender, EventArgs e)
         {
             DateTimePickeriAyarla(dateTimePickerRandevuTarihi.Value);
+        }
+
+        private void UC_RandevuSaat_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -61,7 +61,7 @@
       <Project>{f8dcb8c7-6e51-4f64-a92b-d76b9cff0ae0}</Project>
       <Name>HastaneRandevuEFCF_DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HasteneRandevuEFCF_Entities\HastaneRandevuEFCF_Entities.csproj">
+    <ProjectReference Include="..\HastaneRandevuEFCF_Entities\HastaneRandevuEFCF_Entities.csproj">
       <Project>{7cd03132-5419-4491-8ae4-889e8af3433c}</Project>
       <Name>HastaneRandevuEFCF_Entities</Name>
     </ProjectReference>

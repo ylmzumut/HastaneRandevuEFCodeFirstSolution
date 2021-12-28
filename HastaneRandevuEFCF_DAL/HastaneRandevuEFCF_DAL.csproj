@@ -64,15 +64,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HasteneRandevuEFCF_Entities\HastaneRandevuEFCF_Entities.csproj">
-      <Project>{7cd03132-5419-4491-8ae4-889e8af3433c}</Project>
-      <Name>HastaneRandevuEFCF_Entities</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\202112271036155_b1.resx">
       <DependentUpon>202112271036155_b1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HastaneRandevuEFCF_Entities\HastaneRandevuEFCF_Entities.csproj">
+      <Project>{7cd03132-5419-4491-8ae4-889e8af3433c}</Project>
+      <Name>HastaneRandevuEFCF_Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
