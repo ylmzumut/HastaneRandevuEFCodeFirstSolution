@@ -31,6 +31,11 @@ namespace HastaneRandevuEFCF_WinFormUI
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageRandevuIslem = new System.Windows.Forms.TabPage();
+            this.listViewAlinanRandevular = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBoxRandevu = new System.Windows.Forms.GroupBox();
             this.btnRandevuAl = new System.Windows.Forms.Button();
             this.UC_RandevuSaat1 = new HastaneRandevuEFCF_WinFormUI.UC_RandevuSaat();
@@ -46,9 +51,12 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.label1 = new System.Windows.Forms.Label();
             this.txtHastaTCArama = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBoxCiktiDoktorSec = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.dateTimePickerCiktiAl = new System.Windows.Forms.DateTimePicker();
             this.btnCiktiAl = new System.Windows.Forms.Button();
+            this.comboBoxCiktiAlDrSec = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.tabControl1.SuspendLayout();
             this.tabPageRandevuIslem.SuspendLayout();
             this.groupBoxRandevu.SuspendLayout();
@@ -67,12 +75,14 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1082, 569);
+            this.tabControl1.Size = new System.Drawing.Size(1082, 627);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.Click += new System.EventHandler(this.tabControl1_Click);
             // 
             // tabPageRandevuIslem
             // 
             this.tabPageRandevuIslem.BackColor = System.Drawing.Color.LightBlue;
+            this.tabPageRandevuIslem.Controls.Add(this.listViewAlinanRandevular);
             this.tabPageRandevuIslem.Controls.Add(this.groupBoxRandevu);
             this.tabPageRandevuIslem.Controls.Add(this.groupBoxServis);
             this.tabPageRandevuIslem.Controls.Add(this.groupBoxHasta);
@@ -81,9 +91,49 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.tabPageRandevuIslem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageRandevuIslem.Name = "tabPageRandevuIslem";
             this.tabPageRandevuIslem.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPageRandevuIslem.Size = new System.Drawing.Size(1074, 538);
+            this.tabPageRandevuIslem.Size = new System.Drawing.Size(1074, 596);
             this.tabPageRandevuIslem.TabIndex = 0;
             this.tabPageRandevuIslem.Text = "RANDEVU İŞLEMLERİ SAYFASI";
+            // 
+            // listViewAlinanRandevular
+            // 
+            this.listViewAlinanRandevular.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader4});
+            this.listViewAlinanRandevular.FullRowSelect = true;
+            this.listViewAlinanRandevular.GridLines = true;
+            this.listViewAlinanRandevular.HideSelection = false;
+            this.listViewAlinanRandevular.Location = new System.Drawing.Point(19, 442);
+            this.listViewAlinanRandevular.Name = "listViewAlinanRandevular";
+            this.listViewAlinanRandevular.Size = new System.Drawing.Size(1036, 136);
+            this.listViewAlinanRandevular.TabIndex = 3;
+            this.listViewAlinanRandevular.UseCompatibleStateImageBehavior = false;
+            this.listViewAlinanRandevular.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Servis";
+            this.columnHeader3.Width = 80;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Doktor";
+            this.columnHeader1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader1.Width = 120;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Hasta";
+            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader2.Width = 120;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Randevu Tarihi";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 200;
             // 
             // groupBoxRandevu
             // 
@@ -123,6 +173,7 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.UC_RandevuSaat1.Location = new System.Drawing.Point(8, 88);
             this.UC_RandevuSaat1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.UC_RandevuSaat1.Name = "UC_RandevuSaat1";
+            this.UC_RandevuSaat1.RandevuAlabilirAktifMi = false;
             this.UC_RandevuSaat1.SecilenRandevuTarihi = new System.DateTime(((long)(0)));
             this.UC_RandevuSaat1.Size = new System.Drawing.Size(364, 254);
             this.UC_RandevuSaat1.TabIndex = 6;
@@ -252,17 +303,58 @@ namespace HastaneRandevuEFCF_WinFormUI
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.dateTimePickerCiktiAl);
             this.tabPage2.Controls.Add(this.btnCiktiAl);
-            this.tabPage2.Controls.Add(this.comboBoxCiktiDoktorSec);
+            this.tabPage2.Controls.Add(this.comboBoxCiktiAlDrSec);
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1074, 538);
+            this.tabPage2.Size = new System.Drawing.Size(1074, 596);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "DR RANDEVU ÇIKTISI AL";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(260, 110);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(110, 18);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "TARİH SEÇİNİZ:";
+            // 
+            // dateTimePickerCiktiAl
+            // 
+            this.dateTimePickerCiktiAl.Location = new System.Drawing.Point(393, 104);
+            this.dateTimePickerCiktiAl.Name = "dateTimePickerCiktiAl";
+            this.dateTimePickerCiktiAl.Size = new System.Drawing.Size(349, 26);
+            this.dateTimePickerCiktiAl.TabIndex = 3;
+            this.dateTimePickerCiktiAl.ValueChanged += new System.EventHandler(this.dateTimePickerCiktiAl_ValueChanged);
+            // 
+            // btnCiktiAl
+            // 
+            this.btnCiktiAl.BackColor = System.Drawing.Color.LightSalmon;
+            this.btnCiktiAl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCiktiAl.Font = new System.Drawing.Font("Bahnschrift SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnCiktiAl.Location = new System.Drawing.Point(263, 195);
+            this.btnCiktiAl.Name = "btnCiktiAl";
+            this.btnCiktiAl.Size = new System.Drawing.Size(479, 57);
+            this.btnCiktiAl.TabIndex = 2;
+            this.btnCiktiAl.Text = "ÇIKTI AL";
+            this.btnCiktiAl.UseVisualStyleBackColor = false;
+            this.btnCiktiAl.Click += new System.EventHandler(this.btnCiktiAl_Click);
+            // 
+            // comboBoxCiktiAlDrSec
+            // 
+            this.comboBoxCiktiAlDrSec.FormattingEnabled = true;
+            this.comboBoxCiktiAlDrSec.Location = new System.Drawing.Point(393, 27);
+            this.comboBoxCiktiAlDrSec.Name = "comboBoxCiktiAlDrSec";
+            this.comboBoxCiktiAlDrSec.Size = new System.Drawing.Size(349, 26);
+            this.comboBoxCiktiAlDrSec.TabIndex = 1;
+            this.comboBoxCiktiAlDrSec.SelectedIndexChanged += new System.EventHandler(this.comboBoxCiktiAlDrSec_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -273,32 +365,16 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.label5.TabIndex = 0;
             this.label5.Text = "DOKTOR SEÇİNİZ:";
             // 
-            // comboBoxCiktiDoktorSec
+            // printDocument1
             // 
-            this.comboBoxCiktiDoktorSec.FormattingEnabled = true;
-            this.comboBoxCiktiDoktorSec.Location = new System.Drawing.Point(393, 27);
-            this.comboBoxCiktiDoktorSec.Name = "comboBoxCiktiDoktorSec";
-            this.comboBoxCiktiDoktorSec.Size = new System.Drawing.Size(349, 26);
-            this.comboBoxCiktiDoktorSec.TabIndex = 1;
-            // 
-            // btnCiktiAl
-            // 
-            this.btnCiktiAl.BackColor = System.Drawing.Color.LightSalmon;
-            this.btnCiktiAl.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCiktiAl.Font = new System.Drawing.Font("Bahnschrift SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnCiktiAl.Location = new System.Drawing.Point(263, 164);
-            this.btnCiktiAl.Name = "btnCiktiAl";
-            this.btnCiktiAl.Size = new System.Drawing.Size(479, 57);
-            this.btnCiktiAl.TabIndex = 2;
-            this.btnCiktiAl.Text = "ÇIKTI AL";
-            this.btnCiktiAl.UseVisualStyleBackColor = false;
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
             // FormRandevuAlma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
-            this.ClientSize = new System.Drawing.Size(1082, 569);
+            this.ClientSize = new System.Drawing.Size(1082, 627);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormRandevuAlma";
@@ -338,7 +414,15 @@ namespace HastaneRandevuEFCF_WinFormUI
         private UC_RandevuSaat UC_RandevuSaat1;
         private System.Windows.Forms.Button btnRandevuAl;
         private System.Windows.Forms.Button btnCiktiAl;
-        private System.Windows.Forms.ComboBox comboBoxCiktiDoktorSec;
+        private System.Windows.Forms.ComboBox comboBoxCiktiAlDrSec;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DateTimePicker dateTimePickerCiktiAl;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.ListView listViewAlinanRandevular;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
     }
 }

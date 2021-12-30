@@ -74,5 +74,31 @@ namespace HastaneRandevuEFCF_BLL
                 throw ex;
             }
         }
+
+        public RandevuBilgileriViewModel RandevuyuViewModeleAktar(RandevuBilgileri rnd)
+        {
+            try
+            {
+                RandevuBilgileriViewModel rndView = new RandevuBilgileriViewModel()
+                {
+                    RandevuID = rnd.ID,
+                    DoktorID = rnd.DoktorID,
+                    HastaID = rnd.HastaID,
+                    RandevuTarihi = rnd.RandevuTarihi
+                };
+                Hasta hst = myDBContext.Hastalar.FirstOrDefault(x => x.HastaID == rnd.HastaID);
+                rndView.HastaAdSoyad = hst?.HastaAdi + " " + hst?.HastaSoyadi;
+                Doktor dr = myDBContext.Doktorlar.FirstOrDefault(x => x.DoktorID == rnd.DoktorID);
+                rndView.DoktorAdSoyad = dr?.DoktorAdi + " " + dr?.DoktorSoyadi;
+                //servis
+                rndView.Servis = EnumManager.BransiTurkceStringOlarakVer(rnd.Doktor.Brans);
+                return rndView;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

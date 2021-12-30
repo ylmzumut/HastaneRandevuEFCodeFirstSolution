@@ -40,12 +40,15 @@ namespace HastaneRandevuEFCF_WinFormUI
             Doktorum = null;
             DRveTrhyeGoreButonlariniAktifPasifIslemleriniYap();
 
+            timer1.Interval = 10;
+            timer1.Enabled = true;
         }
 
         private void comboBoxSaatler_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
+                GecmisSaatlerinButonlariniPasiflestir();
                 if (Doktorum == null)
                 {
                     RandevuButonlariniPasiflestir();
@@ -79,7 +82,7 @@ namespace HastaneRandevuEFCF_WinFormUI
                 RandevuButonlariniAktiflestir();
                 if (Doktorum != null)
                 {
-                    
+
                     //randevuları alalım
                     List<RandevuBilgileri> drRandevulari = rndManger.DoktorunRandevulariniTariheGoreGetir(Doktorum, DisaridanGelenTarih);
                     if (drRandevulari.Count > 0)
@@ -87,8 +90,8 @@ namespace HastaneRandevuEFCF_WinFormUI
                         //o randevuları tek tek dolaşalım pasifleştirme işlemi yapalım
                         foreach (RandevuBilgileri item in drRandevulari)
                         {
-                            if (item.RandevuTarihi.ToShortTimeString().Substring(0, 2) == comboBoxSaatler.Text.Substring(0, 2)) 
-                                //10:00==10:00
+                            if (item.RandevuTarihi.ToShortTimeString().Substring(0, 2) == comboBoxSaatler.Text.Substring(0, 2))
+                            //10:00==10:00
                             {
                                 string itemsaatim = item.RandevuTarihi.ToShortTimeString();
                                 string itemdk = itemsaatim.Substring(3, 2);//sadece dakikayı aldık
@@ -203,5 +206,41 @@ namespace HastaneRandevuEFCF_WinFormUI
             RandevuAlabilirAktifMi = false;
         }
 
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            GecmisSaatlerinButonlariniPasiflestir();
+        }
+
+        private void GecmisSaatlerinButonlariniPasiflestir()
+        {
+            foreach (Button btnitem in tableLayoutPanelRandevuButtonlar.Controls)
+            {
+                //10:15
+                int dakika = 0;
+                int saat = 0;
+                if (btnitem.Text.Length > 3)
+                {
+                    int.TryParse(btnitem.Text.Substring(3, 2), out dakika);
+                    int.TryParse(btnitem.Text.Substring(0, 2), out saat);
+                }
+
+                if (DisaridanGelenTarih.ToShortDateString() == DateTime.Now.ToShortDateString())
+                {
+                    if (saat < DateTime.Now.Hour)
+                    {
+                        btnitem.BackColor = Color.DarkGray;
+                        btnitem.Enabled = false;
+                    }
+                    else if (saat == DateTime.Now.Hour)
+                    {
+                        if (dakika <= DateTime.Now.Minute)
+                        {
+                            btnitem.BackColor = Color.DarkGray;
+                            btnitem.Enabled = false;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

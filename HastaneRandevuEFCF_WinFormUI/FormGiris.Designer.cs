@@ -32,6 +32,7 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.btnDoktorIslemleri = new System.Windows.Forms.Button();
             this.btnHastaIslemleri = new System.Windows.Forms.Button();
             this.btnRandevuIslemleri = new System.Windows.Forms.Button();
+            this.btnHastaCagir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDoktorIslemleri
@@ -39,7 +40,7 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.btnDoktorIslemleri.BackColor = System.Drawing.Color.DarkOrange;
             this.btnDoktorIslemleri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDoktorIslemleri.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnDoktorIslemleri.Location = new System.Drawing.Point(74, 56);
+            this.btnDoktorIslemleri.Location = new System.Drawing.Point(72, 49);
             this.btnDoktorIslemleri.Name = "btnDoktorIslemleri";
             this.btnDoktorIslemleri.Size = new System.Drawing.Size(278, 93);
             this.btnDoktorIslemleri.TabIndex = 0;
@@ -52,7 +53,7 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.btnHastaIslemleri.BackColor = System.Drawing.Color.YellowGreen;
             this.btnHastaIslemleri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHastaIslemleri.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnHastaIslemleri.Location = new System.Drawing.Point(74, 178);
+            this.btnHastaIslemleri.Location = new System.Drawing.Point(72, 170);
             this.btnHastaIslemleri.Name = "btnHastaIslemleri";
             this.btnHastaIslemleri.Size = new System.Drawing.Size(278, 97);
             this.btnHastaIslemleri.TabIndex = 1;
@@ -65,7 +66,7 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.btnRandevuIslemleri.BackColor = System.Drawing.Color.LightSeaGreen;
             this.btnRandevuIslemleri.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRandevuIslemleri.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnRandevuIslemleri.Location = new System.Drawing.Point(74, 306);
+            this.btnRandevuIslemleri.Location = new System.Drawing.Point(72, 295);
             this.btnRandevuIslemleri.Name = "btnRandevuIslemleri";
             this.btnRandevuIslemleri.Size = new System.Drawing.Size(278, 92);
             this.btnRandevuIslemleri.TabIndex = 2;
@@ -73,12 +74,26 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.btnRandevuIslemleri.UseVisualStyleBackColor = false;
             this.btnRandevuIslemleri.Click += new System.EventHandler(this.btnRandevuIslemleri_Click);
             // 
+            // btnHastaCagir
+            // 
+            this.btnHastaCagir.BackColor = System.Drawing.Color.MediumOrchid;
+            this.btnHastaCagir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHastaCagir.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnHastaCagir.Location = new System.Drawing.Point(72, 415);
+            this.btnHastaCagir.Name = "btnHastaCagir";
+            this.btnHastaCagir.Size = new System.Drawing.Size(278, 97);
+            this.btnHastaCagir.TabIndex = 3;
+            this.btnHastaCagir.Text = "HASTA ÇAĞIRMA FORMU";
+            this.btnHastaCagir.UseVisualStyleBackColor = false;
+            this.btnHastaCagir.Click += new System.EventHandler(this.btnHastaCagir_Click);
+            // 
             // FormGiris
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.NavajoWhite;
-            this.ClientSize = new System.Drawing.Size(428, 450);
+            this.ClientSize = new System.Drawing.Size(428, 554);
+            this.Controls.Add(this.btnHastaCagir);
             this.Controls.Add(this.btnRandevuIslemleri);
             this.Controls.Add(this.btnHastaIslemleri);
             this.Controls.Add(this.btnDoktorIslemleri);
@@ -93,5 +108,6 @@ namespace HastaneRandevuEFCF_WinFormUI
         private System.Windows.Forms.Button btnDoktorIslemleri;
         private System.Windows.Forms.Button btnHastaIslemleri;
         private System.Windows.Forms.Button btnRandevuIslemleri;
+        private System.Windows.Forms.Button btnHastaCagir;
     }
 }

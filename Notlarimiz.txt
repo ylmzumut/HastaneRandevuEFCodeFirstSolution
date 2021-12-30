@@ -1,1 +1,12 @@
 Install-Package EntityFramework -Version 6.4.4
+
+
+migration update yapmak eklemek için
+
+add-migration b2
+
+update-database //update yapma
+
+-Force hatasý
+
+update-database -Force //hata veriyorsa zorla yaptýrma

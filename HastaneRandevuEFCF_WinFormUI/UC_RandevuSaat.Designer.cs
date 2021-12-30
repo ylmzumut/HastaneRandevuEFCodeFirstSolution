@@ -29,6 +29,7 @@ namespace HastaneRandevuEFCF_WinFormUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.comboBoxSaatler = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanelRandevuButtonlar = new System.Windows.Forms.TableLayoutPanel();
@@ -36,6 +37,7 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.btn45 = new System.Windows.Forms.Button();
             this.btn00 = new System.Windows.Forms.Button();
             this.btn30 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanelRandevuButtonlar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,6 +132,10 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.btn30.Text = "button3";
             this.btn30.UseVisualStyleBackColor = false;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // UC_RandevuSaat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -157,5 +163,6 @@ namespace HastaneRandevuEFCF_WinFormUI
         private System.Windows.Forms.Button btn45;
         private System.Windows.Forms.Button btn00;
         private System.Windows.Forms.Button btn30;
+        private System.Windows.Forms.Timer timer1;
     }
 }

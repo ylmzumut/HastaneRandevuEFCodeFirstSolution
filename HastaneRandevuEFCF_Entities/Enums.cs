@@ -16,7 +16,7 @@ namespace HastaneRandevuEFCF_Entities
         BransYok,
         Dahiliye,
         KBB,
-        GözHastaliklari,
+        GozHastaliklari,
         Ortopedi,
         Kardiyoloji
     }
