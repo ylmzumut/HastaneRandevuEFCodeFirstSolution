@@ -50,7 +50,7 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.listBoxHastalar = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtHastaTCArama = new System.Windows.Forms.TextBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageCiktiAl = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.dateTimePickerCiktiAl = new System.Windows.Forms.DateTimePicker();
             this.btnCiktiAl = new System.Windows.Forms.Button();
@@ -62,13 +62,13 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.groupBoxRandevu.SuspendLayout();
             this.groupBoxServis.SuspendLayout();
             this.groupBoxHasta.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabPageCiktiAl.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageRandevuIslem);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPageCiktiAl);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
@@ -301,21 +301,22 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.txtHastaTCArama.TabIndex = 3;
             this.txtHastaTCArama.TextChanged += new System.EventHandler(this.txtHastaTCArama_TextChanged);
             // 
-            // tabPage2
+            // tabPageCiktiAl
             // 
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.dateTimePickerCiktiAl);
-            this.tabPage2.Controls.Add(this.btnCiktiAl);
-            this.tabPage2.Controls.Add(this.comboBoxCiktiAlDrSec);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Location = new System.Drawing.Point(4, 27);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1074, 596);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "DR RANDEVU ÇIKTISI AL";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageCiktiAl.Controls.Add(this.label6);
+            this.tabPageCiktiAl.Controls.Add(this.dateTimePickerCiktiAl);
+            this.tabPageCiktiAl.Controls.Add(this.btnCiktiAl);
+            this.tabPageCiktiAl.Controls.Add(this.comboBoxCiktiAlDrSec);
+            this.tabPageCiktiAl.Controls.Add(this.label5);
+            this.tabPageCiktiAl.Location = new System.Drawing.Point(4, 27);
+            this.tabPageCiktiAl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPageCiktiAl.Name = "tabPageCiktiAl";
+            this.tabPageCiktiAl.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPageCiktiAl.Size = new System.Drawing.Size(1074, 596);
+            this.tabPageCiktiAl.TabIndex = 1;
+            this.tabPageCiktiAl.Text = "DR RANDEVU ÇIKTISI AL";
+            this.tabPageCiktiAl.UseVisualStyleBackColor = true;
+            this.tabPageCiktiAl.Leave += new System.EventHandler(this.tabPageCiktiAl_Leave);
             // 
             // label6
             // 
@@ -388,8 +389,8 @@ namespace HastaneRandevuEFCF_WinFormUI
             this.groupBoxServis.PerformLayout();
             this.groupBoxHasta.ResumeLayout(false);
             this.groupBoxHasta.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabPageCiktiAl.ResumeLayout(false);
+            this.tabPageCiktiAl.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -410,7 +411,7 @@ namespace HastaneRandevuEFCF_WinFormUI
         private System.Windows.Forms.ListBox listBoxHastalar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtHastaTCArama;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageCiktiAl;
         private UC_RandevuSaat UC_RandevuSaat1;
         private System.Windows.Forms.Button btnRandevuAl;
         private System.Windows.Forms.Button btnCiktiAl;

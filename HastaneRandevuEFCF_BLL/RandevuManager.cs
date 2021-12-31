@@ -18,18 +18,28 @@ namespace HastaneRandevuEFCF_BLL
             try
             {
                 List<RandevuBilgileri> rndList = new List<RandevuBilgileri>();
+                List<RandevuBilgileri> returnList = new List<RandevuBilgileri>();
 
                 rndList = myDBContext.RandevuBilgileri.Where(x => x.DoktorID == dr.DoktorID).ToList();
-                //Burada foreach döngüsü kullanmadık çünkü foreach koleksiyonu bozamaz. Biz burada tarihi eşleşmeyen randevuları listemizden sileceğiz.
-                for (int i = 0; i < rndList.Count; i++)
+                //1.yöntem ---> for
+                //for (int i = 0; i < rndList.Count; i++)
+                //{
+                //    if (rndList[i].RandevuTarihi.ToShortDateString() == trh.ToShortDateString())
+                //    {
+                //        returnList.Add(rndList[i]);
+                //    }
+                //}
+
+                //2.yöntem ---> foreach
+                foreach (RandevuBilgileri item in rndList)
                 {
-                    if (rndList[i].RandevuTarihi.ToShortDateString() != trh.ToShortDateString())
+                    if (item.RandevuTarihi.ToShortDateString() == trh.ToShortDateString())
                     {
-                        rndList.Remove(rndList[i]);
+                        returnList.Add(item);
                     }
                 }
 
-                return rndList;
+                return returnList;
             }
             catch (Exception ex)
             {

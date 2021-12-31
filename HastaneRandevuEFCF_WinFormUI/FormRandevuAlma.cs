@@ -25,9 +25,10 @@ namespace HastaneRandevuEFCF_WinFormUI
             RandevuTarihveSaatGroupBoxiniPasiflestir();
             HastaListBoxiniDoldur();
 
-            DateTimePickeriAyarla(DateTime.Now);
+            DateTimePickeriAyarla();
             //comboCiktiAl
             DoktorlaricomboBoxCiktiAlDrSeceDoldur();
+            comboBoxCiktiAlDrSec.SelectedIndex = -1;
 
         }
         private void DoktorlaricomboBoxCiktiAlDrSeceDoldur()
@@ -38,13 +39,13 @@ namespace HastaneRandevuEFCF_WinFormUI
             comboBoxCiktiAlDrSec.DataSource = doktorManagerim.TumAktifDoktorlariGetir();
         }
 
-        private void DateTimePickeriAyarla(DateTime trh)
+        private void DateTimePickeriAyarla()
         {
             dateTimePickerRandevuTarihi.Format = DateTimePickerFormat.Custom;
             dateTimePickerRandevuTarihi.CustomFormat = "dd.MM.yyyy";
             dateTimePickerRandevuTarihi.MinDate = DateTime.Now.AddMinutes(-1);
             dateTimePickerRandevuTarihi.MaxDate = dateTimePickerRandevuTarihi.Value.AddDays(15);
-            dateTimePickerRandevuTarihi.Value = trh;
+            dateTimePickerRandevuTarihi.Value = DateTime.Now;
 
             //if (dateTimePickerRandevuTarihi.Text.Contains("Saturday"))
             //{
@@ -106,7 +107,7 @@ namespace HastaneRandevuEFCF_WinFormUI
 
         private void listBoxHastalar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             if (listBoxHastalar.SelectedIndex >= 0)
             {
                 ServisGroupBoxiniAktiflestir();
@@ -116,7 +117,7 @@ namespace HastaneRandevuEFCF_WinFormUI
                 ServisGroupBoxiniPasiflestir();
                 RandevuTarihveSaatGroupBoxiniPasiflestir();
             }
-            DateTimePickeriAyarla(DateTime.Now);
+            DateTimePickeriAyarla();
             UC_RandevuSaat1.Temizle();
         }
         private void ServisGroupBoxiniAktiflestir()
@@ -147,13 +148,13 @@ namespace HastaneRandevuEFCF_WinFormUI
                 listBoxDoktorlar.DataSource = null;
             }
             listBoxDoktorlar.SelectedIndex = -1;
-            DateTimePickeriAyarla(DateTime.Now);
+            DateTimePickeriAyarla();
             UC_RandevuSaat1.Temizle();
         }
 
         private void listBoxDoktorlar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DateTimePickeriAyarla(DateTime.Now);
+            DateTimePickeriAyarla();
             if (listBoxDoktorlar.SelectedIndex >= 0)
             {
                 RandevuTarihveSaatGroupBoxiniAktifestir();
@@ -169,7 +170,6 @@ namespace HastaneRandevuEFCF_WinFormUI
 
         private void dateTimePickerRandevuTarihi_ValueChanged(object sender, EventArgs e)
         {
-            DateTimePickeriAyarla(dateTimePickerRandevuTarihi.Value);
             UC_RandevuSaat1.DisaridanGelenTarih = dateTimePickerRandevuTarihi.Value;
             UC_RandevuSaat1.Temizle();
         }
@@ -194,7 +194,7 @@ namespace HastaneRandevuEFCF_WinFormUI
                 }
                 if (!UC_RandevuSaat1.RandevuAlabilirAktifMi)
                 {
-                    MessageBox.Show("Randevu alabilmeniz için yukarıdaki randevu saati butonlarına tıklayarak saat seçmelisiniz!","UYARI",MessageBoxButtons.OK,MessageBoxIcon.Stop);
+                    MessageBox.Show("Randevu alabilmeniz için yukarıdaki randevu saati butonlarına tıklayarak saat seçmelisiniz!", "UYARI", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
                 //Hastanın o tarihe o saate başka randevusu varsa alamaz.
                 Hasta secilenHasta = listBoxHastalar.SelectedItem as Hasta;
@@ -208,14 +208,14 @@ namespace HastaneRandevuEFCF_WinFormUI
                 RandevuBilgileri yeniRandevu = new RandevuBilgileri()
                 {
                     HastaID = secilenHasta.HastaID,
-                    DoktorID=secilenDoktor.DoktorID,
-                    RandevuTarihi=UC_RandevuSaat1.SecilenRandevuTarihi
+                    DoktorID = secilenDoktor.DoktorID,
+                    RandevuTarihi = UC_RandevuSaat1.SecilenRandevuTarihi
                 };
                 bool rndAlindiMi = false;
                 rndAlindiMi = rndManager.RandevuyuAl(yeniRandevu);
                 if (rndAlindiMi)
                 {
-                    MessageBox.Show("RANDEVUNUZ ALINMIŞTIR","BİLGİ",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    MessageBox.Show("RANDEVUNUZ ALINMIŞTIR", "BİLGİ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     //alınan randevuyu listviewe ekleyelim
                     ListVieweRandevuyuEkle(yeniRandevu);
 
@@ -270,12 +270,17 @@ namespace HastaneRandevuEFCF_WinFormUI
         {
             try
             {
-                if (comboBoxCiktiAlDrSec.SelectedIndex < 0)
+                if (comboBoxCiktiAlDrSec.SelectedIndex >= 0)
                 {
-                    throw new Exception("Lütfen doktor seçiniz");
+                    Doktor secilenDr = doktorManagerim.DoktoruIDyeGoreBul((int)comboBoxCiktiAlDrSec.SelectedValue);
+                    CiktiAlButonuAktifPasifliginiAyarla(secilenDr, dateTimePickerCiktiAl.Value);
                 }
-                Doktor secilenDr = doktorManagerim.DoktoruIDyeGoreBul((int)comboBoxCiktiAlDrSec.SelectedValue);
-                CiktiAlButonuAktifPasifliginiAyarla(secilenDr, dateTimePickerCiktiAl.Value);
+                else
+                {
+                    dateTimePickerCiktiAl.Value = DateTime.Now;
+                    btnCiktiAl.Enabled = false;
+                }
+
             }
             catch (Exception ex)
             {
@@ -312,7 +317,8 @@ namespace HastaneRandevuEFCF_WinFormUI
             }
             else
             {
-
+                dateTimePickerCiktiAl.Value = DateTime.Now;
+                btnCiktiAl.Enabled=false;
             }
         }
 
@@ -430,5 +436,12 @@ namespace HastaneRandevuEFCF_WinFormUI
                 MessageBox.Show("HATA: " + ex.Message);
             }
         }
+
+        private void tabPageCiktiAl_Leave(object sender, EventArgs e)
+        {
+            comboBoxCiktiAlDrSec.SelectedIndex = -1;
+        }
+
+        
     }
 }
